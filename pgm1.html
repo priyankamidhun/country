@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TODOS</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-6">
+                <h2 class="mt-5 text-center-primary">To Do List</h2>
+                <table class="table-bordered w-100 mt-5">
+                    <thead>
+                        <tr>
+                            <th class="p-3">UserID</th>
+                            <th class="p-3">ID</th>
+                            <th class="p-3">Title</th>
+                            <th class="p-3">Completed</th>
+                        </tr>
+                    </thead>
+                    <tbody id="result">
+
+                    </tbody>
+                </table>
+            </div>
+            <div class="col=md-3"></div>
+        </div>
+    </div>
+    <script>
+        // Ajax is used to make API calls
+        // It uses an inbuilt class named XMLHttprequest
+        // we need to create an object of this class to access its methods
+
+        // 1) create an object of the class
+        const http = new XMLHttpRequest();
+
+        // 2) open method:to establish API connection
+        http.open('get', 'https://jsonplaceholder.typicode.com/todos');
+
+        // 3) send request
+        http.send();
+
+        http.onreadystatechange = () => {
+            console.log(http.readyState);
+            if (http.readyState == 4) {
+                console.log(http.responseText);
+                let allTodos = JSON.parse(http.responseText);
+                allTodos.forEach(item => {
+                    result.innerHTML +=
+                        `<tr>
+                            <td>${item.userId}</td>
+                            <td>${item.id}</td>
+                            <td>${item.title}</td>
+                            <td>${item.completed}</td>
+                        </tr>`
+                })
+            }
+        }
+    </script>
+</body>
+
+</html>

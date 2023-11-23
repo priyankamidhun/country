@@ -1,0 +1,48 @@
+<!-- program to illustrate promise and its status -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+</head>
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4"></div>
+            <div class="col-md-4">
+                <h1 class="text-primary text-center mt-5">Lottery Contest</h1>
+                <h3 id="result" class="mt-5 text-center">Result</h3>
+            </div>
+            <div class="col-md-4"></div>
+        </div>
+    </div>
+
+    <script>
+        let obj = new Promise((res, rej) => {
+            let myLotteryNo = 3;
+            let lotteryNo = Math.floor(Math.random() * 5);
+            if (lotteryNo == myLotteryNo) {
+                res('You Won');
+            }
+            else {
+                rej('Better luck next time !');
+            }
+        });
+        obj.then((response) => {
+            result.innerHTML = response;
+            result.style.color = "green";
+        }).catch((error) => {
+            result.innerHTML = error;
+            result.style.color = "red";
+        })
+    </script>
+</body>
+
+</html>
